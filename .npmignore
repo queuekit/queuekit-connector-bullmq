@@ -1,0 +1,7 @@
+coverage
+docs
+docker-compose.yaml
+.eslintrc.js
+.github
+.prettierignore
+.prettierrc.js
