@@ -43,8 +43,20 @@ export const registerRequestHandlers = ({
       name: request.data.queueName,
       prefix: request.data.queuePrefix,
     });
-    const jobCounts = await queue.bull.getJobCounts();
-    return jobCounts;
+    const jobCounts = await queue.bull.getJobCounts(
+      'wait',
+      'active',
+      'completed',
+      'failed',
+      'delayed',
+    );
+    return {
+      waiting: jobCounts.wait,
+      active: jobCounts.active,
+      completed: jobCounts.completed,
+      failed: jobCounts.failed,
+      delayed: jobCounts.delayed,
+    };
   };
 
   const getWaiting = async (request: Request) => {
@@ -114,7 +126,7 @@ export const registerRequestHandlers = ({
     });
     const job = await queue.bull.getJob(request.data.jobId);
     const state = await job?.getState();
-    return { ...job, state };
+    return { ...job, state, queue: undefined };
   };
 
   const pauseQueue = async (request: Request) => {
