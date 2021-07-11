@@ -1,4 +1,4 @@
-import Bull from 'bull';
+import { Queue as BullQueue, QueueEvents } from 'bullmq';
 import { Redis } from 'ioredis';
 import { Socket } from 'socket.io-client';
 import { registerEventHandler } from './event-handlers';
@@ -8,7 +8,8 @@ export interface Queue {
   key: string;
   name: string;
   prefix: string;
-  bull: Bull.Queue;
+  bull: BullQueue;
+  bullEvents: QueueEvents;
 }
 
 // eslint-disable-next-line import/no-mutable-exports
@@ -84,9 +85,17 @@ export const updateQueuesCache = async ({
       console.log(`Caching new queue with key: ${q.key}`);
       const queue: Queue = {
         ...q,
-        bull: new Bull(q.name, {
+        bullEvents: new QueueEvents(q.name, {
+          connection: {
+            host: redisConfig.host,
+            port: redisConfig.port,
+            db: redisConfig.db,
+            password: redisConfig.password,
+          },
+        }),
+        bull: new BullQueue(q.name, {
           prefix: q.prefix,
-          redis: {
+          connection: {
             host: redisConfig.host,
             port: redisConfig.port,
             db: redisConfig.db,

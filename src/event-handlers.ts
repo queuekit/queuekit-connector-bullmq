@@ -1,3 +1,4 @@
+import { Job } from 'bullmq';
 import { Socket } from 'socket.io-client';
 import { Queue } from './queues';
 import { debug } from './utils';
@@ -18,23 +19,23 @@ export const registerEventHandler = ({
 }) => {
   [
     {
-      event: 'global:waiting',
+      event: 'waiting',
       queueMetricType: 'job_queued',
     },
     {
-      event: 'global:active',
+      event: 'active',
       queueMetricType: 'job_processing',
     },
     {
-      event: 'global:completed',
+      event: 'completed',
       queueMetricType: 'job_completed',
     },
     {
-      event: 'global:failed',
+      event: 'failed',
       queueMetricType: 'job_failed',
     },
   ].forEach(({ event, queueMetricType }) => {
-    queue.bull.on(event, (jobId: string) => {
+    queue.bullEvents.on(event, ({ jobId }: { jobId: string }) => {
       const eventData = {
         timestamp: utcNow(),
         apiKey,

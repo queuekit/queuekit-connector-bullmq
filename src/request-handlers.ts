@@ -150,7 +150,7 @@ export const registerRequestHandlers = ({
       name: request.data.queueName,
       prefix: request.data.queuePrefix,
     });
-    await queue.bull.empty();
+    await queue.bull.drain();
     return queue;
   };
 
@@ -160,7 +160,7 @@ export const registerRequestHandlers = ({
       prefix: request.data.queuePrefix,
     });
     const job = await queue.bull.getJob(request.data.jobId);
-    await job?.discard();
+    job?.discard();
     const discardedJob = await queue.bull.getJob(request.data.jobId);
     const state = await discardedJob?.getState();
     return { ...discardedJob, state };

@@ -1,12 +1,12 @@
 {
-  "name": "queuemetrics-connector-bullmq",
+  "name": "queuekit-connector-bullmq",
   "version": "1.0.0",
-  "description": "The BullMQ connector for QueueMetrics.io",
+  "description": "The BullMQ connector for QueueKit.com",
   "author": "Jason Russell",
   "license": "MIT",
   "preferGlobal": true,
   "keywords": [
-    "queuemetrics",
+    "queuekit",
     "bull",
     "bullmq",
     "job",
@@ -18,14 +18,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/queuemetrics/queuemetrics-connector-bullmq.git"
+    "url": "git+https://github.com/queuekit/queuekit-connector-bullmq.git"
   },
   "bugs": {
-    "url": "https://github.com/queuemetrics/queuemetrics-connector-bullmq/issues"
+    "url": "https://github.com/queuekit/queuekit-connector-bullmq/issues"
   },
-  "homepage": "https://github.com/queuemetrics/queuemetrics-connector-bullmq#readme",
+  "homepage": "https://github.com/queuekit/queuekit-connector-bullmq#readme",
   "bin": {
-    "queuemetrics-connector-bull": "./dist/bin/index.js"
+    "queuekit-connector-bullmq": "./dist/bin/index.js"
   },
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -37,6 +37,7 @@
   "dependencies": {
     "@types/debug": "^4.1.5",
     "@types/p-map": "^2.0.0",
+    "bullmq": "^1.37.1",
     "commander": "^6.2.1",
     "date-fns": "^2.16.1",
     "debug": "^4.3.1",
