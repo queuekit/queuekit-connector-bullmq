@@ -41,6 +41,16 @@ npx queuekit-connector-bullmq -u redis://<your-redis-host>:<your-redis-port>/<yo
 
 Your API key can be obtained from your [queuekit.com Dashboard](https://dashboard.queuekit.com/)
 
+### Usage with Docker
+
+The connector can be run with our pre-built docker image:
+
+```sh
+docker run -it --net=host queuekit/queuekit-connector-bullmq -u redis://<redis-host>:<redis-port>/<db-number> -a <your-queuekit-api-key>
+```
+
+Your API key can be obtained from your [queuekit.com Dashboard](https://dashboard.queuekit.com/)
+
 ### Other connectors
 
 [Bull connector](https://github.com/queuekit/queuekit-connector-bull)
