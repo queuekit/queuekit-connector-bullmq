@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "@types/debug": "^4.1.5",
-    "@types/p-map": "^2.0.0",
     "bullmq": "^1.37.1",
     "commander": "^6.2.1",
     "date-fns": "^2.16.1",

@@ -1,4 +1,3 @@
-import { Job } from 'bullmq';
 import { Socket } from 'socket.io-client';
 import { Queue } from './queues';
 import { debug } from './utils';

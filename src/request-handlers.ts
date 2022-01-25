@@ -126,7 +126,7 @@ export const registerRequestHandlers = ({
     });
     const job = await queue.bull.getJob(request.data.jobId);
     const state = await job?.getState();
-    return { ...job, state, queue: undefined };
+    return { ...job?.toJSON(), state, queue: undefined };
   };
 
   const pauseQueue = async (request: Request) => {
@@ -175,7 +175,7 @@ export const registerRequestHandlers = ({
     job?.discard();
     const discardedJob = await queue.bull.getJob(request.data.jobId);
     const state = await discardedJob?.getState();
-    return { ...discardedJob, state };
+    return { ...discardedJob?.toJSON(), state };
   };
 
   const promoteJob = async (request: Request) => {
@@ -187,7 +187,7 @@ export const registerRequestHandlers = ({
     await job?.promote();
     const promotedJob = await queue.bull.getJob(request.data.jobId);
     const state = await promotedJob?.getState();
-    return { ...promotedJob, state };
+    return { ...promotedJob?.toJSON(), state };
   };
 
   const removeJob = async (request: Request) => {
@@ -208,7 +208,7 @@ export const registerRequestHandlers = ({
     await job?.retry();
     const promotedJob = await queue.bull.getJob(request.data.jobId);
     const state = await promotedJob?.getState();
-    return { ...promotedJob, state };
+    return { ...promotedJob?.toJSON(), state };
   };
 
   const requestHandlers: { [key: string]: (request: Request) => any } = {
