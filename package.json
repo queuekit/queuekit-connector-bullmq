@@ -1,6 +1,6 @@
 {
   "name": "queuekit-connector-bullmq",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The BullMQ connector for QueueKit.com",
   "author": "Jason Russell",
   "license": "MIT",
